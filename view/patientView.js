@@ -9,6 +9,12 @@ class PatientView {
     );
   }
 
+  static updatePatientView(data) {
+    console.log(
+      `update data success {"id" : ${data.id}, "namaPasien": ${data.namaPasien}, "daftarPenyakit" : [${data.daftarPenyakit}]}`
+    );
+  }
+
 }
 
 module.exports = PatientView;

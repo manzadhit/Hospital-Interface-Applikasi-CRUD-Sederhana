@@ -11,6 +11,16 @@ class PatientController {
       }
     });
   }
+
+  static updatePatient(id, namaPasien, daftarPenyakit) {
+    Patient.updatePatient(id, namaPasien, daftarPenyakit, (err, data) => {
+      if(err) {
+        PatientView.errorView(err);
+      } else {
+        PatientView.updatePatientView(data);
+      }
+    })
+  }
 }
 
 module.exports = PatientController;

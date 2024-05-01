@@ -47,7 +47,7 @@ class Patient {
         const obj = [];
         obj.push(newPatient);
         obj.push(currentData.length);
-        
+
         this.saveData(currentData, (err) => {
           if (err) {
             cb(err);
@@ -55,6 +55,32 @@ class Patient {
             cb(null, obj);
           }
         });
+      }
+    });
+  }
+
+  static updatePatient(id, namaPasien, daftarPenyakit, cb) {
+    this.findAllData((err, data) => {
+      if (err) {
+        cb(err);
+      } else {
+        let patient = data.find((patient) => patient.id === id);
+
+        if (!patient) {
+          cb("Patient not found");
+        } else {
+          patient.id = id;
+          patient.namaPasien = namaPasien;
+          patient.daftarPenyakit = daftarPenyakit;
+  
+          this.saveData(data, (err) => {
+            if (err) {
+              cb(err);
+            } else {
+              cb(null, patient);
+            }
+          });
+        }
       }
     });
   }

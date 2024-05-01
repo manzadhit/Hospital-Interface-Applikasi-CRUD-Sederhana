@@ -22,6 +22,9 @@ switch (command) {
   case "addPatient":
     PatientController.addPatient(argument[0], argument[1], argument.slice(2));
     break;
+  case "updatePatient":
+    PatientController.updatePatient(argument[0], argument[1], argument.slice(2));
+    break;
   case "logout" :
     EmployeeController.logout();
     break;
