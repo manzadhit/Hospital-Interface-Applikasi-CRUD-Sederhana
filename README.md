@@ -24,10 +24,15 @@ Proyek ini dikembangkan menggunakan Node.js, sehingga Anda memerlukan Node.js ya
 ## Instalasi dan Penggunaan
 
 Untuk menginstal dan menjalankan proyek ini, ikuti langkah-langkah berikut:
-
-1. Unduh atau clone repositori proyek ini ke direktori lokal Anda.
-2. Buka terminal atau command prompt dan navigasikan ke direktori proyek.
-3. Jalankan perintah `node index.js` untuk melihat daftar perintah yang tersedia.
+  1.  Unduh atau clone repositori proyek ini ke direktori lokal Anda.
+  ```bash
+  git clone https://github.com/nyomanaditia/Hospital-Interface-Applikasi-CRUD-Sederhana.git
+  ```
+  2.  Buka terminal atau command prompt dan navigasikan ke direktori proyek.
+  3.  Jalankan perintah node index.js untuk melihat daftar perintah yang tersedia.
+  ```bash
+  node index.js
+  ```
 
 ## Penggunaan
 
