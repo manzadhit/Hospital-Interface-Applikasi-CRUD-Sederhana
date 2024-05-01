@@ -36,24 +36,43 @@ class Employee {
     );
   }
 
+  static isAdminLoggedIn(data, cb) {
+    const userLogin = data.find((user) => user.login == true);
+    if (!userLogin) {
+      cb("no user is logged in");
+    } else if (userLogin.position !== "admin") {
+      cb(
+        "Access denied: You do not have the admin role to perform this operation"
+      );
+    } else {
+      cb(null);
+    }
+  }
+
   static register(username, password, position, cb) {
     this.findAllData((err, data) => {
       if (err) {
         console.log(err);
       } else {
-        let obj = new Employee(username, password, position);
-        let newData = data;
-        newData.push(obj);
-
-        let objArr = [];
-        objArr.push(obj);
-        objArr.push(newData.length);
-
-        this.saveData(data, (err) => {
+        this.isAdminLoggedIn(data, (err) => {
           if (err) {
             cb(err);
           } else {
-            cb(null, objArr);
+            let obj = new Employee(username, password, position);
+            let newData = data;
+            newData.push(obj);
+
+            let objArr = [];
+            objArr.push(obj);
+            objArr.push(newData.length);
+
+            this.saveData(data, (err) => {
+              if (err) {
+                cb(err);
+              } else {
+                cb(null, objArr);
+              }
+            });
           }
         });
       }
@@ -121,7 +140,13 @@ class Employee {
       if (err) {
         cb(err);
       } else {
-        cb(null, data);
+        this.isAdminLoggedIn(data, (err) => {
+          if (err) {
+            cb(err);
+          } else {
+            cb(null, data);
+          }
+        });
       }
     });
   }
