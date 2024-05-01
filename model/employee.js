@@ -1,50 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-
-// class Employee {
-//   constructor(username, password, position) {
-//     this.username = username;
-//     this.password = password;
-//     this.position = position;
-//     this.login = false;
-//   }
-
-//   static findAll(cb) {
-//     fs.readFile("../data/employee.json", "utf8", (err, data) => {
-//       if (err) {
-//         cb(err);
-//       } else {
-//         cb(err, JSON.parse(data));
-//       }
-//     });
-//   }
-
-//   static register(name, password, role, cb) {
-//     this.findAll((err, data) => {
-//       if (err) {
-//         console.log(err);
-//       } else {
-//         let obj = new Employee(name, password, role);
-//         let newData = data;
-//         newData.push(obj);
-
-//         let objArr = [];
-//         objArr.push(obj);
-//         objArr.push(newData.length);
-
-//         fs.writeFile("../data/employee.json", JSON.stringify(newData), (err) => {
-//           if (err) {
-//             console.log(err);
-//           } else {
-//             cb(err, objArr);
-//           }
-//         });
-//       }
-//     });
-//   }
-
-// }
-
 class Employee {
   constructor(username, password, position) {
     this.username = username;
@@ -67,6 +22,20 @@ class Employee {
     );
   }
 
+  static saveData(data, cb) {
+    fs.writeFile(
+      path.resolve(__dirname, "../dataset/employee.json"),
+      JSON.stringify(data),
+      (err) => {
+        if (err) {
+          cb(err);
+        } else {
+          cb(null);
+        }
+      }
+    );
+  }
+
   static register(username, password, position, cb) {
     this.findAllData((err, data) => {
       if (err) {
@@ -80,17 +49,13 @@ class Employee {
         objArr.push(obj);
         objArr.push(newData.length);
 
-        fs.writeFile(
-          path.resolve(__dirname, "../dataset/employee.json"),
-          JSON.stringify(newData),
-          (err) => {
-            if (err) {
-              console.log(err);
-            } else {
-              cb(err, objArr);
-            }
+        this.saveData(data, (err) => {
+          if (err) {
+            cb(err);
+          } else {
+            cb(null, objArr);
           }
-        );
+        });
       }
     });
   }
@@ -115,17 +80,13 @@ class Employee {
             cb("Invalid username or password");
           } else {
             user.login = true;
-            fs.writeFile(
-              path.resolve(__dirname, "../dataset/employee.json"),
-              JSON.stringify(data),
-              (err) => {
-                if (err) {
-                  cb(err);
-                } else {
-                  cb(null, user);
-                }
+            this.saveData(data, (err) => {
+              if (err) {
+                cb(err);
+              } else {
+                cb(null, user);
               }
-            );
+            });
           }
         }
       }
@@ -137,22 +98,19 @@ class Employee {
       if (err) {
         cb(err);
       } else {
-        const user = data.find(user => user.login == true);
+        const user = data.find((user) => user.login == true);
 
-        if(!user) {
-          cb('no user is logged in')
+        if (!user) {
+          cb("no user is logged in");
         } else {
           user.login = false;
-          fs.writeFile(
-            path.resolve(__dirname, '../dataset/employee.json'),
-            JSON.stringify(data), (err) => {
-              if(err) {
-                cb(err);
-              } else {
-                cb(null, user);
-              }
+          this.saveData(data, (err) => {
+            if (err) {
+              cb(err);
+            } else {
+              cb(null, user);
             }
-          );
+          });
         }
       }
     });
