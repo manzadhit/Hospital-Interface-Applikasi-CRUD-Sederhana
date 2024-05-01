@@ -1,7 +1,5 @@
 const fs = require("fs");
-const path = require("path")
-
-
+const path = require("path");
 
 // class Employee {
 //   constructor(username, password, position) {
@@ -97,55 +95,65 @@ class Employee {
     });
   }
 
+  static isUserLoggedIn(data) {
+    return data.some((user) => user.login == true);
+  }
+
   static login(username, password, cb) {
     this.findAllData((err, data) => {
       if (err) {
         cb(err);
       } else {
-        let newData = data;
-        newData.forEach((user) => {
-          if (user.username == username && user.password == password) {
-            user.login = true;
+        if (this.isUserLoggedIn(data)) {
+          cb("User already logged in");
+        } else {
+          const user = data.find(
+            (user) => user.username == username && user.password == password
+          );
 
+          if (!user) {
+            cb("Invalid username or password");
+          } else {
+            user.login = true;
             fs.writeFile(
               path.resolve(__dirname, "../dataset/employee.json"),
-              JSON.stringify(newData),
+              JSON.stringify(data),
               (err) => {
                 if (err) {
                   cb(err);
                 } else {
-                  cb(err, user);
+                  cb(null, user);
                 }
               }
             );
           }
-        });
+        }
       }
     });
   }
+
   static logout(cb) {
     this.findAllData((err, data) => {
       if (err) {
         cb(err);
       } else {
-        let newData = data;
-        newData.forEach((user) => {
-          if (user.login == true) {
-            user.login = false;
+        const user = data.find(user => user.login == true);
 
-            fs.writeFile(
-              path.resolve(__dirname, "../dataset/employee.json"),
-              JSON.stringify(newData),
-              (err) => {
-                if (err) {
-                  cb(err);
-                } else {
-                  cb(err, user);
-                }
+        if(!user) {
+          cb('no user is logged in')
+        } else {
+          user.login = false;
+          fs.writeFile(
+            path.resolve(__dirname, '../dataset/employee.json'),
+            JSON.stringify(data), (err) => {
+              if(err) {
+                cb(err);
+              } else {
+                cb(null, user);
               }
-            );
-          }
-        });
+            }
+          );
+        }
       }
     });
   }

@@ -16,7 +16,7 @@ class HospitalController {
   static login(name, password) {
     Employee.login(name, password, (err, user) => {
       if(err) {
-        HospitalController.errorView(err);
+        HospitalView.errorView(err);
       } else {
         HospitalView.loginView(user);
       }
@@ -25,7 +25,7 @@ class HospitalController {
   static logout() {
     Employee.logout((err, user) => {
       if(err) {
-        HospitalController.errorView(err);
+        HospitalView.errorView(err);
       } else {
         HospitalView.logoutView(user);
       }
