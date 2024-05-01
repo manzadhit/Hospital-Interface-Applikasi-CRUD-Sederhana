@@ -39,7 +39,9 @@ Untuk menginstal dan menjalankan proyek ini, ikuti langkah-langkah berikut:
 Untuk menggunakan aplikasi ini, jalankan perintah `node index.js` di terminal atau command prompt untuk melihat daftar perintah yang tersedia. Beberapa perintah utama yang tersedia adalah:
 
 - `node index.js register <username> <password> <jabatan>`: Mendaftarkan karyawan baru (hanya admin yang dapat mengakses perintah ini).
-- `node index.js login <username> <password>`: Login sebagai dokter atau admin.
+- `node index.js login <username> <password>`: Login sebagai dokter atau admin. Kredensial default:
+  - Admin: username = "admin", password = "admin"
+  - Dokter: username = "dokter", password = "dokter"
 - `node index.js addPatient <namaPasien> <penyakit1> <penyakit2> ...`: Menambahkan pasien baru (hanya dokter yang dapat mengakses perintah ini).
 - `node index.js updatePatient <namaPasien> <penyakit1> <penyakit2> ...`: Memperbarui data pasien (hanya dokter yang dapat mengakses perintah ini).
 - `node index.js deletePatient <id>`: Menghapus data pasien (hanya dokter yang dapat mengakses perintah ini).

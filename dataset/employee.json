@@ -1,1 +1,1 @@
-[{"username":"aditia","password":"123","position":"dokter","login":false},{"username":"nyoman","password":"123","position":"admin","login":true},{"username":"testing","password":"123","position":"dokter","login":false}]
+[{"username":"admin","password":"admin","position":"admin","login":false},{"username":"dokter","password":"dokter","position":"dokter","login":false}]
