@@ -18,6 +18,28 @@ class PatientView {
   static deletePatientView(data) {
     console.log(`Data with id ${data.id} was successfully deleted`);
   }
+
+  static showPatientView(data) {
+    data.forEach((patient, index) => {
+      console.log(`Data pasien ke-${index + 1}`);
+      console.log(`ID pasien : ${patient.id}`);
+      console.log(`Nama pasien : ${patient.namaPasien}`);
+      console.log(
+        `Daftar Penyakit pasien : ${patient.daftarPenyakit.join(", ")}`
+      );
+      console.log("\n");
+    });
+  }
+
+  static findPatientView(data) {
+    console.log(`pasien ditemukan`);
+    data.forEach((patient) => {
+      console.log('ID pasien :', patient.id);
+      console.log('Nama pasien :', patient.namaPasien);
+      console.log('Daftar penyakit pasien :', patient.daftarPenyakit.join(", "));
+      console.log("\n");
+    })
+  }
 }
 
 module.exports = PatientView;

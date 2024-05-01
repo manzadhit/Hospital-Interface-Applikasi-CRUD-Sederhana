@@ -115,6 +115,16 @@ class Employee {
       }
     });
   }
+
+  static showEmployee(cb) {
+    this.findAllData((err, data) => {
+      if (err) {
+        cb(err);
+      } else {
+        cb(null, data);
+      }
+    });
+  }
 }
 
 module.exports = Employee;

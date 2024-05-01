@@ -32,6 +32,16 @@ class EmployeeController {
     });
   }
 
+  static showEmployee() {
+    Employee.showEmployee((err, data) => {
+      if (err) {
+        EmployeeView.errorView(err);
+      } else {
+        EmployeeView.showEmployeeView(data);
+      }
+    });
+  }
+
   static help() {
     EmployeeView.help();
   }

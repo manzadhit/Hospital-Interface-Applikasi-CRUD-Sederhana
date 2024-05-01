@@ -91,7 +91,7 @@ class Patient {
         cb(err);
       } else {
         const patientIndex = data.findIndex((patient) => patient.id === id);
-        
+
         if(patientIndex == -1) {
           cb('Patient not found');
         } else {
@@ -103,6 +103,32 @@ class Patient {
               cb(null, data);
             }
           })
+        }
+      }
+    })
+  }
+
+  static showPatient(cb) {
+    this.findAllData((err, data) => {
+      if(err) {
+        cb(err);
+      } else {
+        cb(null, data);
+      }
+    })
+  }
+
+  static findPatientBy(namaOrId, cb) {
+    this.findAllData((err, data) => {
+      if(err) {
+        cb(err);
+      } else {
+        const patient = data.filter(patient => patient.namaPasien === namaOrId || patient.id === namaOrId);
+
+        if(!patient) {
+          cb("Patient not found");
+        } else {
+          cb(null, patient);
         }
       }
     })

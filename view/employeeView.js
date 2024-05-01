@@ -17,6 +17,15 @@ class EmployeeView {
     console.log(err);
   }
 
+  static showEmployeeView(data) {
+    data.forEach((employee, index) => {
+      console.log(`Data Employee ke-${index + 1}`);
+      console.log(`Nama : ${employee.username}`);
+      console.log(`Jabatan : ${employee.position}`);
+      console.log("\n");
+    });
+  }
+
   static help() {
     console.log(`
 ==========================

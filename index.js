@@ -31,6 +31,17 @@ switch (command) {
   case "logout" :
     EmployeeController.logout();
     break;
+  case "show":
+    if(argument[0] == "employee") {
+      EmployeeController.showEmployee()
+    } else {
+      PatientController.showPatient()
+    }
+    break;
+
+  case "findPatientBy: <name/id>":
+    PatientController.findPatientBy(argument[0]);
+    break;
   default:
     EmployeeController.help()
     break;
