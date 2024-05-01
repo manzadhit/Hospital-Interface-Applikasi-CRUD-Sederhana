@@ -21,6 +21,16 @@ class PatientController {
       }
     })
   }
+
+  static deletePatient(id) {
+    Patient.deletePatient(id, (err, data) => {
+      if(err) {
+        PatientView.errorView(err);
+      } else {
+        PatientView.deletePatientView(data);
+      }
+    })
+  }
 }
 
 module.exports = PatientController;

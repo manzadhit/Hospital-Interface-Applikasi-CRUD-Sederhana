@@ -84,6 +84,29 @@ class Patient {
       }
     });
   }
+
+  static deletePatient(id, cb) {
+    this.findAllData((err, data) => {
+      if(err) {
+        cb(err);
+      } else {
+        const patientIndex = data.findIndex((patient) => patient.id === id);
+        
+        if(patientIndex == -1) {
+          cb('Patient not found');
+        } else {
+          data.splice(patientIndex, 1);
+          this.saveData(data, (err) => {
+            if(err) {
+              cb(err);
+            } else {
+              cb(null, data);
+            }
+          })
+        }
+      }
+    })
+  }
 }
 
 module.exports = Patient;

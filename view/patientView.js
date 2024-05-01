@@ -15,6 +15,9 @@ class PatientView {
     );
   }
 
+  static deletePatientView(data) {
+    console.log(`Data with id ${data.id} was successfully deleted`);
+  }
 }
 
 module.exports = PatientView;

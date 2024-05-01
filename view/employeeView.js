@@ -19,15 +19,17 @@ class EmployeeView {
 
   static help() {
     console.log(`
+==========================
 HOSPITAL INTERFACE COMMAND
-> node index.js register <username> <password> <jabatan> 
-> node index.js login <username> <password>
-> node index.js addPatient <id> <namaPasien> <penyakit1> <penyakit2> ....
-> node index.js updatePatient <id> <namaPasien> <penyakit1> <penyakit2> ....
-> node index.js deletePatient <id> <namaPasien> <penyakit1> <penyakit2> ....
-> node index.js logout
-> node index.js show <employee/patient> 
-> node index.js findPatientBy: <name/id> <namePatient/idPatient>
+==========================
+node index.js register <username> <password> <jabatan>
+node index.js login <username> <password>
+node index.js addPatient <namaPasien> <penyakit1> <penyakit2> ....
+node index.js updatePatient <namaPasien> <penyakit1> <penyakit2> ....
+node index.js deletePatient <id>
+node index.js logout
+node index.js show <employee/patient>
+node index.js findPatientBy: <name/id> <namePatient/idPatient>
     `);
   }
 }
